@@ -86,7 +86,7 @@ public class ClientController {
     /**
      * Metodo para eliminar un cliente
      * @param id Identificador del cliente a eliminar
-     * @return Una respuesta o mensaje 
+     * @return Una respuesta o mensaje
      */
     @DeleteMapping("/{id}")
     public Mono<ResponseEntity<Void>> deleteClientById(@PathVariable String id){

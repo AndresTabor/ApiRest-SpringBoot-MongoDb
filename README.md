@@ -9,8 +9,8 @@ Autor
 ## Sobre el proyecto
 En el desarrollado de este proyecto se implementa programacion funcional y reactiva para la creacion de una Api Rest de Clientes para un Hotel.
 
-- [ Despliegue Heroku ](https://hotelreactive-app.herokuapp.com/api/client/)
-- [ Swagger ](https://hotelreactive-app.herokuapp.com/webjars/swagger-ui/index.html)
+- [ Despliegue Heroku ](https://hotel-api-springboot.herokuapp.com/api/client/)
+- [ Swagger ](https://hotel-api-springboot.herokuapp.com/swagger-ui/)
 
 ## Requisitos basicos para ejecutar el proyecto
 El presente proyecto esta desarrollado con el lenguaje de programacion JAVA usando la version 18 de su JDK (Java Development Kit), para la correcta ejecucion debe tener instalado los siguientes componentes.
