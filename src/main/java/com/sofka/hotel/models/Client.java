@@ -34,7 +34,7 @@ public class Client {
     private String document;
 
     @NotBlank(message = "El email es requerido")
-    @Email
+    @Email(message = "El email no tiene el formato requerido requerido")
     private String email;
 
     @NotBlank(message = "El lugar de procedencia es requerida")
