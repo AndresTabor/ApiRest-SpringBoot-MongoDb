@@ -1,8 +1,10 @@
 package com.sofka.hotel.controllers;
 
 
+import com.sofka.hotel.dto.UpdateClietnDto;
 import com.sofka.hotel.models.Client;
 import com.sofka.hotel.services.ClientService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +25,17 @@ public class ClientController {
      */
     private final ClientService clientService;
 
+    private final ModelMapper modelMapper;
     /**
      * Constructor del controlador
+     *
      * @param clientService servicio del cliente que se comunica con la DB
+     * @param modelMapper
      */
     @Autowired
-    public ClientController(ClientService clientService) {
+    public ClientController(ClientService clientService, ModelMapper modelMapper) {
         this.clientService = clientService;
+        this.modelMapper = modelMapper;
     }
 
     /**
@@ -78,9 +84,8 @@ public class ClientController {
      * @return El cliente actualizado
      */
     @PutMapping("/{id}")
-    public Mono<ResponseEntity<Client>>  updateClient(@Valid @PathVariable String id , @RequestBody Client client) {
-        return clientService.updateClient(id,client);
-
+    public Mono<ResponseEntity<Client>>  updateClient(@PathVariable String id , @Valid @RequestBody UpdateClietnDto client) {
+        return clientService.updateClient(id,modelMapper.map(client, Client.class)).log();
     }
 
     /**

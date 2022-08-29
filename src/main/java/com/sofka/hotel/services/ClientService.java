@@ -3,6 +3,7 @@ package com.sofka.hotel.services;
 
 import com.sofka.hotel.models.Client;
 import com.sofka.hotel.repository.ClientRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,12 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
 
+    private final ModelMapper modelMapper;
+
     @Autowired
-    public ClientService(ClientRepository clientRepository) {
+    public ClientService(ClientRepository clientRepository, ModelMapper modelMapper) {
         this.clientRepository = clientRepository;
+        this.modelMapper = modelMapper;
     }
 
     public Flux<Client> getAllClients(){
@@ -44,16 +48,7 @@ public class ClientService {
     public Mono<ResponseEntity<Client>> updateClient(String id, Client client) {
         return clientRepository.findById(id)
                 .flatMap(oldClient -> {
-                    oldClient.setName(client.getName());
-                    oldClient.setSurName(client.getSurName());
-                    oldClient.setDocumentType(client.getDocumentType());
-                    oldClient.setDocument(client.getDocument());
-                    oldClient.setEmail(client.getEmail());
-                    oldClient.setComesFrom(client.getComesFrom());
-                    oldClient.setDate(client.getDate());
-                    oldClient.setRoom(client.getRoom());
-                    oldClient.setPrice(client.getPrice());
-                    oldClient.setState(client.getState());
+                    modelMapper.map(client,oldClient);
                     return clientRepository.save(oldClient);
                 })
                 .map(updatedClient -> new ResponseEntity<>(updatedClient, HttpStatus.OK))
